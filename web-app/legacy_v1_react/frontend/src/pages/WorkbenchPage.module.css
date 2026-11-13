@@ -1,0 +1,238 @@
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.header {
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: var(--color-text-muted);
+}
+
+.guidelinesSection {
+  padding: 1rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+}
+
+.guidelinesTitle {
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  color: var(--color-text-main);
+}
+
+.guidelinesGrid {
+  padding-left: 1.25rem;
+  color: var(--color-text-muted);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.35rem;
+}
+
+.dropZone {
+  border: 2px dashed var(--color-border);
+  background-color: var(--color-surface);
+  padding: 2rem 1.5rem;
+  border-radius: var(--radius-md);
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.dropZoneDragging {
+  border-color: var(--color-border-focus);
+  background-color: var(--color-surface-muted);
+}
+
+.fileInput {
+  display: none;
+}
+
+.dropZoneLabel {
+  cursor: pointer;
+  display: block;
+}
+
+.cameraIcon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.dropPrompt {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.dropHint {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.previewContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 1.5rem;
+}
+
+.previewImg {
+  max-width: 180px;
+  max-height: 140px;
+  border-radius: var(--radius-sm);
+  object-fit: contain;
+  border: 1px solid var(--color-border);
+}
+
+.previewFileName {
+  font-weight: 700;
+}
+
+.previewMeta {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.previewLoadedTag {
+  font-size: 0.8rem;
+  color: var(--color-success-text);
+  margin-top: 0.25rem;
+}
+
+.consentContainer {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 1.5rem;
+}
+
+.consentLabel {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+.consentCheckbox {
+  margin-top: 0.2rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  cursor: pointer;
+}
+
+.consentText {
+  font-size: 0.9rem;
+  color: var(--color-text-main);
+}
+
+.clientErrorBox {
+  padding: 1rem;
+  background-color: var(--color-danger-bg);
+  color: var(--color-danger-text);
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.actionRow {
+  margin-bottom: 2rem;
+}
+
+.btnPrimary {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.btnDisabled {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--color-surface-muted);
+  color: var(--color-text-muted);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: not-allowed;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.btnPrimary:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.skeletonSection {
+  margin-bottom: 2rem;
+}
+
+.skeletonTitle {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.serverErrorBox {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: var(--color-danger-bg);
+  color: var(--color-danger-text);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+}
+
+.resultsSection {
+  margin-top: 2rem;
+}
+
+.resultsTitle {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.cardsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.summaryBox {
+  padding: 1.25rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.summaryTitle {
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.summaryText {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+

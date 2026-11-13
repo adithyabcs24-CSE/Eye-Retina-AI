@@ -1,0 +1,21 @@
+{
+  "versions": {
+    "direct_encoder": "ResNet50_IMAGENET1K_V2_STUB",
+    "fundus_generator": "UNAVAILABLE",
+    "fundus_predictor": "UNAVAILABLE",
+    "pipeline_version": "0.1.0-stub"
+  },
+  "training_data": {
+    "name": "Synthetic Fixtures & Demo Cohort Stubs",
+    "provenance": "No real patient data loaded in stub mode",
+    "pairs_verified": false
+  },
+  "intended_use": "Investigational research prototype to benchmark feasibility of direct biomarker prediction vs cross-modal reconstruction from anterior external-eye photographs.",
+  "out_of_scope_use": "Clinical patient diagnosis, triage, disease screening, or medical advice. Not an FDA/CE approved device.",
+  "limitations": [
+    "Optical barrier: External photography captures anterior eye segment only; no direct visualization of posterior retina microvasculature.",
+    "No paired external-fundus datasets are currently loaded; Pathway B is strictly disabled to prevent generative hallucination.",
+    "Ambient lighting, white-balance variation, and conjunctival inflammation introduce systemic colorimetric confounding."
+  ]
+}
+

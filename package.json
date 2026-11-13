@@ -1,0 +1,21 @@
+{
+  "name": "retinal-fundus-research-prototype",
+  "version": "1.0.0",
+  "description": "Ophthalmic & Systemic Biomarker Research Prototype",
+  "type": "module",
+  "scripts": {
+    "start": "node start.js",
+    "test": "npm run test:backend && npm run test:frontend",
+    "test:backend": "cd web-app/backend && PYTHONPATH=. .venv/bin/pytest -v",
+    "test:frontend": "cd web-app/frontend && node --test tests/api.test.js"
+  },
+  "keywords": [
+    "ophthalmology",
+    "biomarkers",
+    "deep-learning",
+    "fastapi"
+  ],
+  "author": "Research Prototype Team",
+  "license": "UNLICENSED"
+}
+

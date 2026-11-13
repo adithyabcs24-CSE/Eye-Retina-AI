@@ -1,0 +1,67 @@
+{
+  "type": "object",
+  "required": [
+    "targets",
+    "pathway_b_available"
+  ],
+  "properties": {
+    "targets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "task_type",
+          "units",
+          "pathways",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "task_type": {
+            "type": "string",
+            "enum": [
+              "classification",
+              "regression"
+            ]
+          },
+          "units": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "pathways": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "direct",
+                "indirect"
+              ]
+            }
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "LOADED",
+              "STUB",
+              "UNAVAILABLE"
+            ]
+          }
+        }
+      }
+    },
+    "pathway_b_available": {
+      "type": "boolean"
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CapabilitiesResponse"
+}

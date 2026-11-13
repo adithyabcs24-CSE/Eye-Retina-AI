@@ -1,0 +1,14 @@
+{
+  "name": "retinal-fundus-web-app",
+  "version": "1.0.0",
+  "description": "Ophthalmic & Systemic Biomarker Web Application",
+  "type": "module",
+  "scripts": {
+    "start": "node start.js",
+    "test": "npm run test:backend && npm run test:frontend",
+    "test:backend": "cd backend && PYTHONPATH=. .venv/bin/pytest -v",
+    "test:frontend": "cd frontend && node --test tests/api.test.js"
+  },
+  "license": "UNLICENSED"
+}
+

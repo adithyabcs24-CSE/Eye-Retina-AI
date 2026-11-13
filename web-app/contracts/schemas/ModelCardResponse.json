@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "required": [
+    "versions",
+    "training_data",
+    "intended_use",
+    "out_of_scope_use",
+    "limitations"
+  ],
+  "properties": {
+    "versions": {
+      "type": "object"
+    },
+    "training_data": {
+      "type": "object"
+    },
+    "intended_use": {
+      "type": "string"
+    },
+    "out_of_scope_use": {
+      "type": "string"
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ModelCardResponse"
+}

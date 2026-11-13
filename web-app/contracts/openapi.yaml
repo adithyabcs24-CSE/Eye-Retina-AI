@@ -1,0 +1,435 @@
+openapi: 3.0.3
+info:
+  title: Ophthalmic & Systemic Biomarker Prototype API
+  description: >
+    API contract for the research prototype evaluating direct prediction vs.
+    reconstruction-based prediction from external-eye photographs.
+    RESEARCH PROTOTYPE. NOT A MEDICAL DIAGNOSIS.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: Gateway Service (Node.js/Express)
+  - url: http://localhost:8000
+    description: Direct Inference Service (Python/FastAPI)
+
+paths:
+  /api/health:
+    get:
+      summary: Health and model readiness check
+      operationId: getHealth
+      responses:
+        '200':
+          description: Health check result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+        '500':
+          description: Internal service error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/capabilities:
+    get:
+      summary: Retrieve candidate targets and pipeline capabilities
+      operationId: getCapabilities
+      responses:
+        '200':
+          description: Available biomarker targets and pathway availability
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CapabilitiesResponse'
+        '500':
+          description: Error reading capabilities
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/quality:
+    post:
+      summary: Inspect external-eye photograph quality gate
+      operationId: checkQuality
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [image]
+              properties:
+                image:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Quality gate report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QualityResponse'
+        '400':
+          description: Invalid upload payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/predict/direct:
+    post:
+      summary: Direct biomarker prediction (Pathway A)
+      operationId: predictDirect
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [image, target_id]
+              properties:
+                image:
+                  type: string
+                  format: binary
+                target_id:
+                  type: string
+      responses:
+        '200':
+          description: Direct prediction outcome
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictDirectResponse'
+        '400':
+          description: Invalid request or quality rejection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/predict/indirect:
+    post:
+      summary: Indirect cross-modal fundus prediction (Pathway B)
+      operationId: predictIndirect
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [image, target_id]
+              properties:
+                image:
+                  type: string
+                  format: binary
+                target_id:
+                  type: string
+      responses:
+        '200':
+          description: Indirect prediction outcome
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictIndirectResponse'
+        '400':
+          description: Invalid request or quality rejection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '501':
+          description: Pathway B unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/predict/compare:
+    post:
+      summary: Paired comparison between Pathway A and Pathway B
+      operationId: predictCompare
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [image, target_id]
+              properties:
+                image:
+                  type: string
+                  format: binary
+                target_id:
+                  type: string
+      responses:
+        '200':
+          description: Comparison report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictCompareResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/metrics:
+    get:
+      summary: Retrieve empirical validation metrics from outputs/metrics/*.json
+      operationId: getMetrics
+      responses:
+        '200':
+          description: List of logged metrics evaluations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricsResponse'
+
+  /api/model-card:
+    get:
+      summary: Retrieve model card metadata and clinical safety bounds
+      operationId: getModelCard
+      responses:
+        '200':
+          description: Model card specification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelCardResponse'
+
+  /api/explain/gradcam:
+    get:
+      summary: Retrieve Grad-CAM heatmap explanation
+      operationId: getGradCam
+      parameters:
+        - in: query
+          name: target_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Grad-CAM explanation status or heatmap
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status]
+                properties:
+                  status:
+                    type: string
+                  heatmap_base64:
+                    type: string
+                  message:
+                    type: string
+
+components:
+  schemas:
+    HealthResponse:
+      type: object
+      required: [gateway, inference, models]
+      properties:
+        gateway:
+          type: string
+          enum: [LOADED, STUB, UNAVAILABLE]
+        inference:
+          type: string
+          enum: [LOADED, STUB, UNAVAILABLE]
+        models:
+          type: object
+          required: [direct, generator, fundus_predictor]
+          properties:
+            direct:
+              type: string
+              enum: [LOADED, STUB, UNAVAILABLE]
+            generator:
+              type: string
+              enum: [LOADED, STUB, UNAVAILABLE]
+            fundus_predictor:
+              type: string
+              enum: [LOADED, STUB, UNAVAILABLE]
+
+    CapabilitiesResponse:
+      type: object
+      required: [targets, pathway_b_available]
+      properties:
+        targets:
+          type: array
+          items:
+            $ref: '#/components/schemas/TargetCapability'
+        pathway_b_available:
+          type: boolean
+
+    TargetCapability:
+      type: object
+      required: [id, label, task_type, units, pathways, status]
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        task_type:
+          type: string
+          enum: [classification, regression]
+        units:
+          type: ["string", "null"]
+        pathways:
+          type: array
+          items:
+            type: string
+            enum: [direct, indirect]
+        status:
+          type: string
+          enum: [LOADED, STUB, UNAVAILABLE]
+
+    QualityCheckItem:
+      type: object
+      required: [name, value, threshold, passed]
+      properties:
+        name:
+          type: string
+        value:
+          type: number
+        threshold:
+          type: number
+        passed:
+          type: boolean
+
+    QualityResponse:
+      type: object
+      required: [passed, checks, reasons]
+      properties:
+        passed:
+          type: boolean
+        checks:
+          type: array
+          items:
+            $ref: '#/components/schemas/QualityCheckItem'
+        reasons:
+          type: array
+          items:
+            type: string
+
+    PredictDirectResponse:
+      type: object
+      required: [status, target_id, task_type, prediction, units, model_version, latency_ms, warnings]
+      properties:
+        status:
+          type: string
+          enum: [loaded, stub, unavailable]
+        target_id:
+          type: string
+        task_type:
+          type: string
+          enum: [classification, regression]
+        prediction:
+          oneOf:
+            - type: number
+            - type: string
+            - type: object
+            - type: "null"
+        units:
+          type: ["string", "null"]
+        model_version:
+          type: string
+        latency_ms:
+          type: number
+        warnings:
+          type: array
+          items:
+            type: string
+
+    PredictIndirectResponse:
+      type: object
+      required: [status, target_id, task_type, prediction, units, model_version, latency_ms, warnings, generated_image, generated_image_warning]
+      properties:
+        status:
+          type: string
+          enum: [loaded, stub, unavailable]
+        target_id:
+          type: string
+        task_type:
+          type: string
+          enum: [classification, regression]
+        prediction:
+          oneOf:
+            - type: number
+            - type: string
+            - type: object
+            - type: "null"
+        units:
+          type: ["string", "null"]
+        model_version:
+          type: string
+        latency_ms:
+          type: number
+        warnings:
+          type: array
+          items:
+            type: string
+        generated_image:
+          type: ["string", "null"]
+        generated_image_warning:
+          type: ["string", "null"]
+
+    PredictCompareResponse:
+      type: object
+      required: [target_id, task_type, direct, indirect, disagreement_summary]
+      properties:
+        target_id:
+          type: string
+        task_type:
+          type: string
+        direct:
+          $ref: '#/components/schemas/PredictDirectResponse'
+        indirect:
+          $ref: '#/components/schemas/PredictIndirectResponse'
+        disagreement_summary:
+          type: object
+          required: [reconstruction_adds_value, delta, note]
+          properties:
+            reconstruction_adds_value:
+              type: ["boolean", "null"]
+            delta:
+              type: ["number", "null"]
+            note:
+              type: string
+
+    MetricsResponse:
+      type: array
+      items:
+        type: object
+
+    ModelCardResponse:
+      type: object
+      required: [versions, training_data, intended_use, out_of_scope_use, limitations]
+      properties:
+        versions:
+          type: object
+        training_data:
+          type: object
+        intended_use:
+          type: string
+        out_of_scope_use:
+          type: string
+        limitations:
+          type: array
+          items:
+            type: string
+
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message]
+          properties:
+            code:
+              type: string
+            message:
+              type: string

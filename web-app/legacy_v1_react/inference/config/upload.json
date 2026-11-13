@@ -1,0 +1,6 @@
+{
+  "allowed_extensions": [".jpg", ".jpeg", ".png"],
+  "allowed_mime_types": ["image/jpeg", "image/png"],
+  "max_file_size_bytes": 10485760
+}
+

@@ -1,0 +1,83 @@
+{
+  "type": "object",
+  "required": [
+    "status",
+    "target_id",
+    "task_type",
+    "prediction",
+    "units",
+    "model_version",
+    "latency_ms",
+    "warnings",
+    "generated_image",
+    "generated_image_warning"
+  ],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "loaded",
+        "stub",
+        "unavailable"
+      ]
+    },
+    "target_id": {
+      "type": "string"
+    },
+    "task_type": {
+      "type": "string",
+      "enum": [
+        "classification",
+        "regression"
+      ]
+    },
+    "prediction": {
+      "oneOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "units": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model_version": {
+      "type": "string"
+    },
+    "latency_ms": {
+      "type": "number"
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "generated_image": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "generated_image_warning": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PredictIndirectResponse"
+}

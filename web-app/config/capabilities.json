@@ -1,0 +1,55 @@
+{
+  "_comment": "SAMPLE CONFIGURATION: Active candidate targets for research prototype. Pathway B is formally locked to false pending verified paired patient cohorts.",
+  "pathway_b_available": false,
+  "targets": [
+    {
+      "id": "haemoglobin_anaemia",
+      "label": "Haemoglobin & Anaemia",
+      "task_type": "regression",
+      "units": "g/dL",
+      "pathways": ["direct"],
+      "status": "STUB"
+    },
+    {
+      "id": "diabetes_status",
+      "label": "Diabetes Status",
+      "task_type": "classification",
+      "units": null,
+      "pathways": ["direct"],
+      "status": "STUB"
+    },
+    {
+      "id": "glucose_regression",
+      "label": "Blood Glucose",
+      "task_type": "regression",
+      "units": "mg/dL",
+      "pathways": ["direct"],
+      "status": "STUB"
+    },
+    {
+      "id": "diabetic_retinopathy",
+      "label": "Diabetic Retinopathy",
+      "task_type": "classification",
+      "units": null,
+      "pathways": ["direct"],
+      "status": "STUB"
+    },
+    {
+      "id": "hypertension",
+      "label": "Hypertension Risk",
+      "task_type": "classification",
+      "units": null,
+      "pathways": ["direct"],
+      "status": "STUB"
+    },
+    {
+      "id": "cardiovascular_risk",
+      "label": "Cardiovascular Risk Score",
+      "task_type": "regression",
+      "units": "% 10-year risk",
+      "pathways": ["direct"],
+      "status": "STUB"
+    }
+  ]
+}
+

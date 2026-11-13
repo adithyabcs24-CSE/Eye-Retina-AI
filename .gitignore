@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Environment & Credentials
+.env
+.env.local
+*.pem
+*.key
+
+# Data & Checkpoints
+uploads/
+checkpoints/
+data/
+*.pt
+*.pth
+*.onnx
+
+# Build outputs & caches
+dist/
+build/
+.pytest_cache/
+.coverage
+.DS_Store
+

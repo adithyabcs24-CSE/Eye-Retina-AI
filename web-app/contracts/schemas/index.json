@@ -1,0 +1,665 @@
+{
+  "HealthResponse": {
+    "type": "object",
+    "required": [
+      "gateway",
+      "inference",
+      "models"
+    ],
+    "properties": {
+      "gateway": {
+        "type": "string",
+        "enum": [
+          "LOADED",
+          "STUB",
+          "UNAVAILABLE"
+        ]
+      },
+      "inference": {
+        "type": "string",
+        "enum": [
+          "LOADED",
+          "STUB",
+          "UNAVAILABLE"
+        ]
+      },
+      "models": {
+        "type": "object",
+        "required": [
+          "direct",
+          "generator",
+          "fundus_predictor"
+        ],
+        "properties": {
+          "direct": {
+            "type": "string",
+            "enum": [
+              "LOADED",
+              "STUB",
+              "UNAVAILABLE"
+            ]
+          },
+          "generator": {
+            "type": "string",
+            "enum": [
+              "LOADED",
+              "STUB",
+              "UNAVAILABLE"
+            ]
+          },
+          "fundus_predictor": {
+            "type": "string",
+            "enum": [
+              "LOADED",
+              "STUB",
+              "UNAVAILABLE"
+            ]
+          }
+        }
+      }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "HealthResponse"
+  },
+  "CapabilitiesResponse": {
+    "type": "object",
+    "required": [
+      "targets",
+      "pathway_b_available"
+    ],
+    "properties": {
+      "targets": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "id",
+            "label",
+            "task_type",
+            "units",
+            "pathways",
+            "status"
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            },
+            "task_type": {
+              "type": "string",
+              "enum": [
+                "classification",
+                "regression"
+              ]
+            },
+            "units": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "pathways": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "direct",
+                  "indirect"
+                ]
+              }
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "LOADED",
+                "STUB",
+                "UNAVAILABLE"
+              ]
+            }
+          }
+        }
+      },
+      "pathway_b_available": {
+        "type": "boolean"
+      }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "CapabilitiesResponse"
+  },
+  "TargetCapability": {
+    "type": "object",
+    "required": [
+      "id",
+      "label",
+      "task_type",
+      "units",
+      "pathways",
+      "status"
+    ],
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "label": {
+        "type": "string"
+      },
+      "task_type": {
+        "type": "string",
+        "enum": [
+          "classification",
+          "regression"
+        ]
+      },
+      "units": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "pathways": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "direct",
+            "indirect"
+          ]
+        }
+      },
+      "status": {
+        "type": "string",
+        "enum": [
+          "LOADED",
+          "STUB",
+          "UNAVAILABLE"
+        ]
+      }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "TargetCapability"
+  },
+  "QualityCheckItem": {
+    "type": "object",
+    "required": [
+      "name",
+      "value",
+      "threshold",
+      "passed"
+    ],
+    "properties": {
+      "name": {
+        "type": "string"
+      },
+      "value": {
+        "type": "number"
+      },
+      "threshold": {
+        "type": "number"
+      },
+      "passed": {
+        "type": "boolean"
+      }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "QualityCheckItem"
+  },
+  "QualityResponse": {
+    "type": "object",
+    "required": [
+      "passed",
+      "checks",
+      "reasons"
+    ],
+    "properties": {
+      "passed": {
+        "type": "boolean"
+      },
+      "checks": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "name",
+            "value",
+            "threshold",
+            "passed"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "value": {
+              "type": "number"
+            },
+            "threshold": {
+              "type": "number"
+            },
+            "passed": {
+              "type": "boolean"
+            }
+          }
+        }
+      },
+      "reasons": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "QualityResponse"
+  },
+  "PredictDirectResponse": {
+    "type": "object",
+    "required": [
+      "status",
+      "target_id",
+      "task_type",
+      "prediction",
+      "units",
+      "model_version",
+      "latency_ms",
+      "warnings"
+    ],
+    "properties": {
+      "status": {
+        "type": "string",
+        "enum": [
+          "loaded",
+          "stub",
+          "unavailable"
+        ]
+      },
+      "target_id": {
+        "type": "string"
+      },
+      "task_type": {
+        "type": "string",
+        "enum": [
+          "classification",
+          "regression"
+        ]
+      },
+      "prediction": {
+        "oneOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "object"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "units": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "model_version": {
+        "type": "string"
+      },
+      "latency_ms": {
+        "type": "number"
+      },
+      "warnings": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "PredictDirectResponse"
+  },
+  "PredictIndirectResponse": {
+    "type": "object",
+    "required": [
+      "status",
+      "target_id",
+      "task_type",
+      "prediction",
+      "units",
+      "model_version",
+      "latency_ms",
+      "warnings",
+      "generated_image",
+      "generated_image_warning"
+    ],
+    "properties": {
+      "status": {
+        "type": "string",
+        "enum": [
+          "loaded",
+          "stub",
+          "unavailable"
+        ]
+      },
+      "target_id": {
+        "type": "string"
+      },
+      "task_type": {
+        "type": "string",
+        "enum": [
+          "classification",
+          "regression"
+        ]
+      },
+      "prediction": {
+        "oneOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "object"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "units": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "model_version": {
+        "type": "string"
+      },
+      "latency_ms": {
+        "type": "number"
+      },
+      "warnings": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "generated_image": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "generated_image_warning": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "PredictIndirectResponse"
+  },
+  "PredictCompareResponse": {
+    "type": "object",
+    "required": [
+      "target_id",
+      "task_type",
+      "direct",
+      "indirect",
+      "disagreement_summary"
+    ],
+    "properties": {
+      "target_id": {
+        "type": "string"
+      },
+      "task_type": {
+        "type": "string"
+      },
+      "direct": {
+        "type": "object",
+        "required": [
+          "status",
+          "target_id",
+          "task_type",
+          "prediction",
+          "units",
+          "model_version",
+          "latency_ms",
+          "warnings"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "loaded",
+              "stub",
+              "unavailable"
+            ]
+          },
+          "target_id": {
+            "type": "string"
+          },
+          "task_type": {
+            "type": "string",
+            "enum": [
+              "classification",
+              "regression"
+            ]
+          },
+          "prediction": {
+            "oneOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "units": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "model_version": {
+            "type": "string"
+          },
+          "latency_ms": {
+            "type": "number"
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "indirect": {
+        "type": "object",
+        "required": [
+          "status",
+          "target_id",
+          "task_type",
+          "prediction",
+          "units",
+          "model_version",
+          "latency_ms",
+          "warnings",
+          "generated_image",
+          "generated_image_warning"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "loaded",
+              "stub",
+              "unavailable"
+            ]
+          },
+          "target_id": {
+            "type": "string"
+          },
+          "task_type": {
+            "type": "string",
+            "enum": [
+              "classification",
+              "regression"
+            ]
+          },
+          "prediction": {
+            "oneOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "units": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "model_version": {
+            "type": "string"
+          },
+          "latency_ms": {
+            "type": "number"
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "generated_image": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "generated_image_warning": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "disagreement_summary": {
+        "type": "object",
+        "required": [
+          "reconstruction_adds_value",
+          "delta",
+          "note"
+        ],
+        "properties": {
+          "reconstruction_adds_value": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "delta": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "PredictCompareResponse"
+  },
+  "MetricsResponse": {
+    "type": "array",
+    "items": {
+      "type": "object"
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "MetricsResponse"
+  },
+  "ModelCardResponse": {
+    "type": "object",
+    "required": [
+      "versions",
+      "training_data",
+      "intended_use",
+      "out_of_scope_use",
+      "limitations"
+    ],
+    "properties": {
+      "versions": {
+        "type": "object"
+      },
+      "training_data": {
+        "type": "object"
+      },
+      "intended_use": {
+        "type": "string"
+      },
+      "out_of_scope_use": {
+        "type": "string"
+      },
+      "limitations": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "ModelCardResponse"
+  },
+  "ErrorResponse": {
+    "type": "object",
+    "required": [
+      "error"
+    ],
+    "properties": {
+      "error": {
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "ErrorResponse"
+  }
+}

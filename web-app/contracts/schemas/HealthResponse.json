@@ -1,0 +1,62 @@
+{
+  "type": "object",
+  "required": [
+    "gateway",
+    "inference",
+    "models"
+  ],
+  "properties": {
+    "gateway": {
+      "type": "string",
+      "enum": [
+        "LOADED",
+        "STUB",
+        "UNAVAILABLE"
+      ]
+    },
+    "inference": {
+      "type": "string",
+      "enum": [
+        "LOADED",
+        "STUB",
+        "UNAVAILABLE"
+      ]
+    },
+    "models": {
+      "type": "object",
+      "required": [
+        "direct",
+        "generator",
+        "fundus_predictor"
+      ],
+      "properties": {
+        "direct": {
+          "type": "string",
+          "enum": [
+            "LOADED",
+            "STUB",
+            "UNAVAILABLE"
+          ]
+        },
+        "generator": {
+          "type": "string",
+          "enum": [
+            "LOADED",
+            "STUB",
+            "UNAVAILABLE"
+          ]
+        },
+        "fundus_predictor": {
+          "type": "string",
+          "enum": [
+            "LOADED",
+            "STUB",
+            "UNAVAILABLE"
+          ]
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HealthResponse"
+}

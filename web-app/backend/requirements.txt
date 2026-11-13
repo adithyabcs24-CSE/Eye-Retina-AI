@@ -1,0 +1,9 @@
+fastapi==0.162.5
+starlette==1.10.0
+uvicorn==0.34.0
+pydantic==2.10.6
+python-multipart==0.0.33
+pillow==13.0.0
+numpy==2.2.3
+httpx==0.28.1
+pytest==9.2.0

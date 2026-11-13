@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "required": [
+    "name",
+    "value",
+    "threshold",
+    "passed"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "value": {
+      "type": "number"
+    },
+    "threshold": {
+      "type": "number"
+    },
+    "passed": {
+      "type": "boolean"
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "QualityCheckItem"
+}

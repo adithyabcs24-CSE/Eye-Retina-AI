@@ -1,0 +1,23 @@
+{
+  "upload_limits": {
+    "max_size_bytes": 10485760,
+    "allowed_mime_types": [
+      "image/jpeg",
+      "image/png"
+    ],
+    "allowed_extensions": [
+      ".jpg",
+      ".jpeg",
+      ".png"
+    ]
+  },
+  "inspection_thresholds": {
+    "min_width": 128,
+    "min_height": 128,
+    "min_blur_laplacian_var": 30.0,
+    "min_brightness": 20.0,
+    "max_brightness": 240.0,
+    "max_glare_ratio": 0.15
+  }
+}
+

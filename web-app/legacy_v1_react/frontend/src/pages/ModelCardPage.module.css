@@ -1,0 +1,103 @@
+.container {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.header {
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: var(--color-text-muted);
+}
+
+.cardSection {
+  padding: 1.25rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  margin-bottom: 1.5rem;
+}
+
+.sectionTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.intendedUseText {
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.outOfScopeBox {
+  padding: 0.75rem 1rem;
+  background-color: var(--color-danger-bg);
+  color: var(--color-danger-text);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+}
+
+.versionsGrid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5rem 1.5rem;
+  font-size: 0.9rem;
+}
+
+.versionKey {
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.versionVal {
+  font-family: monospace;
+}
+
+.notEvaluatedBox {
+  padding: 1rem;
+  background-color: var(--color-surface-muted);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+.notEvaluatedDesc {
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+.metricsPre {
+  background-color: var(--color-surface-muted);
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+  font-size: 0.85rem;
+}
+
+.limitationsList {
+  padding-left: 1.25rem;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.errorBox {
+  max-width: 850px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background-color: var(--color-danger-bg);
+  color: var(--color-danger-text);
+  border-radius: var(--radius-sm);
+}
+
